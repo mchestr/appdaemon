@@ -2,16 +2,16 @@ entry_light_switch_scene:
   module: zooz_scene
   class: EntryLightSwitchScene
   light: light.entry_light
-  node_name: Entry Light
+  node_name: 26
 
 master_bedroom_light_switch_scene:
   module: zooz_scene
   class: MasterBedroomLightSwitchScene
   light: light.master_bedroom_lights
-  node_name: Master Bedroom Lights
+  node_name: 20
 
 office_light_switch_scene:
   module: zooz_scene
   class: OfficeLightSwitchScene
   light: light.office_light
-  node_name: Office Lights
+  node_name: 32
