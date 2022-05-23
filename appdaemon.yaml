@@ -1,0 +1,18 @@
+appdaemon:
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: !secret elevation
+  time_zone: America/Vancouver
+  total_threads: 0
+  uvloop: true
+  plugins:
+    HASS:
+      type: hass
+      ha_url: http://home-assistant:8123
+      cert_verify: false
+      token: !secret token
+http:
+  url: http://$HOSTNAME:5050
+admin:
+api:
+hadashboard:

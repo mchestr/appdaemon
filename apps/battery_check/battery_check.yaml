@@ -1,0 +1,6 @@
+battery_check:
+  module: battery_check
+  class: BatteryCheck
+  threshold: 30
+  notify_hour_start_hour: 10
+  notify_hour_end_hour: 20

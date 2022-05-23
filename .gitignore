@@ -1,0 +1,6 @@
+compiled
+lost+found
+__pycache__
+secrets.yaml
+secrets
+.vscode
