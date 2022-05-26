@@ -115,7 +115,7 @@ class ZoozScene(hass.Hass):
         await self.call_service(
             'mqtt/publish',
             topic=f'zwave/{self.node_name}/112/0/2/set',
-            payload='1'
+            payload='0'
         )
         await self.call_service(
             'mqtt/publish',
