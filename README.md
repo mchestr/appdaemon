@@ -1,6 +1,6 @@
 # AppDaemon Config
 
-[AppDaemon](https://appdaemon.readthedocs.io/en/latest/) running on [my Kubernetes cluster](https://github.com/mchestr/cluster-k3s).  This configuration is read and persisted within AppDaemon.
+[AppDaemon](https://appdaemon.readthedocs.io/en/latest/) running on [my Kubernetes cluster](https://github.com/mchestr/home-cluster).  This configuration is read and persisted within AppDaemon.
 
 ## Automations
 
