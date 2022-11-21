@@ -168,7 +168,7 @@ class MasterBedroomLightSwitchScene(ZoozScene):
     async def scene_up_2(self, entity, attribute, old, new, kwargs):
         self.log('master_bedroom_light_switch_scene.scene_up_2 called')
         await self.turn_on('group.master_bathroom_lights')
-        await self.turn_on('group.master_bedroom_lights')
+        await self.turn_on('light.master_bedroom_lights')
 
     scene_up_3 = scene_up_2
     scene_up_4 = scene_up_2
@@ -176,7 +176,7 @@ class MasterBedroomLightSwitchScene(ZoozScene):
     async def scene_down_2(self, entity, attribute, old, new, kwargs):
         self.log('master_bedroom_light_switch_scene.scene_down_2 called')
         await self.turn_off('group.master_bathroom_lights')
-        await self.turn_off('group.master_bedroom_lights')
+        await self.turn_off('light.master_bedroom_lights')
 
     scene_down_3 = scene_down_2
     scene_down_4 = scene_down_2
