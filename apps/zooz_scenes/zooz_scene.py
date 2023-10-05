@@ -33,6 +33,11 @@ class ZoozScene(hass.Hass):
     LED_GREEN = "2"
     LED_RED = "3"
 
+    LED_ON_LOAD_OFF = "0"
+    LED_ON_LOAD_ON = "1"
+    LED_ALWAYS_OFF = "2"
+    LED_ALWAYS_ON = "3"
+
     async def initialize(self):
         self.timer_handle_list = []
         self.listen_event_handle_list = []
@@ -100,10 +105,11 @@ class ZoozScene(hass.Hass):
             await self.after_func(entity, attribute, old, new, kwargs)
 
     async def before_func(self, entity, attribute, old, new, kwargs):
+        # Set LED to always ON and COLOR
         await self.call_service(
             'mqtt/publish',
             topic=f'zwave/{self.node_name}/112/0/2/set',
-            payload='3'
+            payload=self.LED_ALWAYS_ON
         )
         await self.call_service(
             'mqtt/publish',
@@ -112,10 +118,11 @@ class ZoozScene(hass.Hass):
         )
 
     async def after_func(self, entity, attribute, old, new, kwargs):
+        # Set LED to ON when load if OFF and COLOR
         await self.call_service(
             'mqtt/publish',
             topic=f'zwave/{self.node_name}/112/0/2/set',
-            payload='0'
+            payload=self.LED_ON_LOAD_OFF
         )
         await self.call_service(
             'mqtt/publish',
@@ -134,7 +141,7 @@ class ZoozScene(hass.Hass):
 
 class OfficeLightSwitchScene(ZoozScene):
 
-    async def scene_up_2(self, entity, attribute, old, new, kwargs):
+    async def scene_up_3(self, entity, attribute, old, new, kwargs):
         self.log('office_light_switch_scene.scene_up_2 called')
         await self.call_service(
             'cover/set_cover_position',
@@ -148,7 +155,7 @@ class OfficeLightSwitchScene(ZoozScene):
         except TimeOutException:
             self.log('desk did not complete in time')
 
-    async def scene_down_2(self, entity, attribute, old, new, kwargs):
+    async def scene_down_3(self, entity, attribute, old, new, kwargs):
         self.log('office_light_switch_scene.scene_down_2 called')
         await self.call_service(
             'cover/set_cover_position',
@@ -167,7 +174,7 @@ class MasterBedroomLightSwitchScene(ZoozScene):
 
     async def scene_up_2(self, entity, attribute, old, new, kwargs):
         self.log('master_bedroom_light_switch_scene.scene_up_2 called')
-        await self.turn_on('group.master_bathroom_lights')
+        await self.turn_on('light.master_bathroom_lights')
         await self.turn_on('light.master_bedroom_lights')
 
     scene_up_3 = scene_up_2
@@ -175,7 +182,7 @@ class MasterBedroomLightSwitchScene(ZoozScene):
 
     async def scene_down_2(self, entity, attribute, old, new, kwargs):
         self.log('master_bedroom_light_switch_scene.scene_down_2 called')
-        await self.turn_off('group.master_bathroom_lights')
+        await self.turn_off('light.master_bathroom_lights')
         await self.turn_off('light.master_bedroom_lights')
 
     scene_down_3 = scene_down_2
@@ -193,9 +200,9 @@ class EntryLightSwitchScene(ZoozScene):
     async def scene_down_2(self, entity, attribute, old, new, kwargs):
         self.log('entry_light_switch_scene.scene_down_2 called')
         await self.sleep(30)
-        await self.turn_off('group.all_lights')
+        await self.turn_off('light.all_lights')
 
-        group_all = self.get_entity('group.all_lights')
+        group_all = self.get_entity('light.all_lights')
         try:
             await group_all.wait_state("off", timeout=30)
         except TimeOutException:

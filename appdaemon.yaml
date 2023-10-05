@@ -8,7 +8,7 @@ appdaemon:
   plugins:
     HASS:
       type: hass
-      ha_url: http://home-assistant:8123
+      ha_url: http://home-assistant.default.svc.cluster.local:8123
       cert_verify: false
       token: !secret token
 http:
