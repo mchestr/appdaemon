@@ -1,4 +1,6 @@
-# AppDaemon Config
+# AppDaemon Config [Deprecated]
+
+Deprecated: I no longer use these automations and instead rely on home assistant blueprints & automations for similar functionality.
 
 [AppDaemon](https://appdaemon.readthedocs.io/en/latest/) running on [my Kubernetes cluster](https://github.com/mchestr/home-cluster).  This configuration is read and persisted within AppDaemon.
 
